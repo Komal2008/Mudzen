@@ -1,0 +1,140 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 20 9% 26%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 20 9% 26%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 20 9% 26%;
+
+    --primary: 20 35% 46%;
+    --primary-foreground: 36 50% 94%;
+
+    --secondary: 36 50% 94%;
+    --secondary-foreground: 20 9% 26%;
+
+    --muted: 36 50% 94%;
+    --muted-foreground: 20 9% 46%;
+
+    --accent: 16 51% 53%;
+    --accent-foreground: 36 50% 94%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 36 30% 88%;
+    --input: 36 30% 88%;
+    --ring: 20 35% 46%;
+
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 20 9% 26%;
+    --foreground: 36 50% 94%;
+
+    --card: 20 9% 26%;
+    --card-foreground: 36 50% 94%;
+
+    --popover: 20 9% 26%;
+    --popover-foreground: 36 50% 94%;
+
+    --primary: 20 35% 46%;
+    --primary-foreground: 36 50% 94%;
+
+    --secondary: 20 9% 36%;
+    --secondary-foreground: 36 50% 94%;
+
+    --muted: 20 9% 36%;
+    --muted-foreground: 36 30% 70%;
+
+    --accent: 16 51% 53%;
+    --accent-foreground: 36 50% 94%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 36 50% 94%;
+
+    --border: 20 9% 36%;
+    --input: 20 9% 36%;
+    --ring: 20 35% 46%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Playfair Display', Georgia, serif;
+  }
+  h1 {
+    font-size: 3rem;
+    line-height: 1.1;
+    font-weight: 700;
+  }
+  h2 {
+    font-size: 2.25rem;
+    line-height: 1.2;
+    font-weight: 700;
+  }
+  h3 {
+    font-size: 1.875rem;
+    line-height: 1.3;
+    font-weight: 600;
+  }
+  h4 {
+    font-size: 1.5rem;
+    line-height: 1.4;
+    font-weight: 600;
+  }
+  h5 {
+    font-size: 1.25rem;
+    line-height: 1.5;
+    font-weight: 600;
+  }
+  h6 {
+    font-size: 1.125rem;
+    line-height: 1.5;
+    font-weight: 600;
+  }
+  p {
+    font-size: 1rem;
+    line-height: 1.75;
+    font-weight: 400;
+  }
+}
+
+@layer utilities {
+  .clay-brown {
+    color: #A46B47;
+  }
+  .bg-clay-brown {
+    background-color: #A46B47;
+  }
+  .terracotta {
+    color: #CB6843;
+  }
+  .bg-terracotta {
+    background-color: #CB6843;
+  }
+  .cream {
+    color: #F4EBDC;
+  }
+  .bg-cream {
+    background-color: #F4EBDC;
+  }
+  .dark-earth {
+    color: #4A3D35;
+  }
+  .bg-dark-earth {
+    background-color: #4A3D35;
+  }
+}
