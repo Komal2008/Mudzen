@@ -1,11 +1,26 @@
+# 🛒 E-Commerce Frontend Website
 
-  # E-Commerce Website Design
+A modern and responsive **E-Commerce Website UI** built using frontend technologies. This project focuses on clean design, smooth user experience, and responsive layouts inspired by real-world applications.
 
-  This is a code bundle for E-Commerce Website Design. The original project is available at https://www.figma.com/design/odVgq2oii5MpudYmilM078/E-Commerce-Website-Design.
+---
 
-  ## Running the code
+## 🚀 Features
 
-  Run `npm i` to install the dependencies.
+- 🏠 Home page with product highlights  
+- 🛍️ Product listing section  
+- 🔍 Search and filter UI  
+- 🧾 Product details page  
+- 📱 Fully responsive design  
+- 🎨 Clean and modern interface  
 
-  Run `npm run dev` to start the development server.
+---
+
+## 🛠️ Tech Stack
+
+- HTML5  
+- CSS3  
+- JavaScript  
+- React (if used)  
+
+---
   
