@@ -16,7 +16,7 @@
 
 # ✨ About
 
-Mudzen is a modern Full Stack E-Commerce platform built using the MERN Stack. It provides a smooth shopping experience with authentication, product management, shopping cart, order management, and an intuitive admin dashboard.
+Mudzen is a modern Full Stack E-Commerce  Handcrafted platform built using the MERN Stack. It provides a smooth shopping experience with authentication, product management, shopping cart, order management, and an intuitive admin dashboard.
 
 
 # ⚡ Features
