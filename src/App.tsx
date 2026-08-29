@@ -13,7 +13,7 @@ import { ContactPage } from './components/ContactPage';
 import { AboutPage } from './components/AboutPage';
 import { Toaster } from './components/ui/sonner';
 import { Product, CartItem, User } from './types';
-import { toast } from 'sonner@2.0.3';
+import { toast } from 'sonner';
 import { LanguageProvider } from './contexts/LanguageContext';
 
 type Page = 'home' | 'shop' | 'product' | 'cart' | 'checkout' | 'order-confirmation' | 'account' | 'contact' | 'about';
