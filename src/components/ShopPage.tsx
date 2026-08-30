@@ -10,7 +10,7 @@ import { ShoppingCart, Star } from 'lucide-react';
 import { Product } from '../types';
 import { products } from '../data/products';
 import { motion } from 'motion/react';
-import { toast } from 'sonner@2.0.3';
+import { toast } from 'sonner';
 
 interface ShopPageProps {
   onNavigate: (page: string, productId?: number) => void;
@@ -130,7 +130,7 @@ export function ShopPage({ onNavigate, onAddToCart }: ShopPageProps) {
                   <Checkbox
                     id="new-arrivals"
                     checked={showNewOnly}
-                    onCheckedChange={(checked) => setShowNewOnly(checked as boolean)}
+                    onCheckedChange={(checked: boolean) => setShowNewOnly(checked)}
                   />
                   <Label htmlFor="new-arrivals" className="cursor-pointer">
                     New Arrivals Only

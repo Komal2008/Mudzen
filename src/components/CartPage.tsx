@@ -9,7 +9,7 @@ interface CartPageProps {
   cart: CartItem[];
   onUpdateQuantity: (productId: number, quantity: number) => void;
   onRemoveItem: (productId: number) => void;
-  onNavigate: (page: string) => void;
+  onNavigate: (page: string, productId?: number) => void;
 }
 
 export function CartPage({ cart, onUpdateQuantity, onRemoveItem, onNavigate }: CartPageProps) {

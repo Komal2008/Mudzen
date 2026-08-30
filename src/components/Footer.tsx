@@ -1,7 +1,7 @@
 import { Facebook, Instagram, Twitter, Mail, Phone, MapPin } from 'lucide-react';
 import { Button } from './ui/button';
 import { Input } from './ui/input';
-import { toast } from 'sonner@2.0.3';
+import { toast } from 'sonner';
 import { useLanguage } from '../contexts/LanguageContext';
 
 export function Footer() {

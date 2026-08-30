@@ -5,7 +5,7 @@ import { Label } from './ui/label';
 import { Textarea } from './ui/textarea';
 import { Mail, Phone, MapPin, Clock } from 'lucide-react';
 import { motion } from 'motion/react';
-import { toast } from 'sonner@2.0.3';
+import { toast } from 'sonner';
 
 export function ContactPage() {
   const handleSubmit = (e: React.FormEvent) => {
