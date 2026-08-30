@@ -8,11 +8,11 @@ import { Star, Minus, Plus, ShoppingCart, Heart, Truck, RotateCcw, ShieldCheck }
 import { Product } from '../types';
 import { products } from '../data/products';
 import { motion } from 'motion/react';
-import { toast } from 'sonner@2.0.3';
+import { toast } from 'sonner';
 
 interface ProductDetailPageProps {
   productId: number;
-  onNavigate: (page: string) => void;
+  onNavigate: (page: string, productId?: number) => void;
   onAddToCart: (product: Product, quantity: number) => void;
 }
 
