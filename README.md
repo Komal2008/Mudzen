@@ -75,6 +75,54 @@ Mudzen is a modern Full Stack E-Commerce  Handcrafted platform built using the M
 
 ---
 
+## 🏗️ Architecture
+
+```text
+                 ┌──────────────────┐
+                 │      User        │
+                 └────────┬─────────┘
+                          │
+                          ▼
+                 ┌──────────────────┐
+                 │  React Frontend  │
+                 │   TypeScript     │
+                 └────────┬─────────┘
+                          │
+                     REST API
+                          │
+                          ▼
+                 ┌──────────────────┐
+                 │ Express Backend  │
+                 │    Node.js       │
+                 └────────┬─────────┘
+                          │
+                          ▼
+                 ┌──────────────────┐
+                 │    MongoDB       │
+                 │    Database      │
+                 └──────────────────┘
+📂 Project Structure
+Mudzen/
+│
+├── src/
+│   ├── components/
+│   ├── services/
+│   ├── types/
+│   ├── App.tsx
+│   └── index.css
+│
+├── server/
+│   └── src/
+│       ├── config/
+│       ├── controllers/
+│       ├── models/
+│       ├── routes/
+│       └── server.ts
+│
+├── public/
+├── package.json
+└── README.md
+
 # 🛠 Tech Stack
 
 ### Frontend
