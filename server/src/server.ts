@@ -4,6 +4,13 @@ import connectDB from "./config/database";
 
 dotenv.config();
 
+app.get("/", (req, res) => {
+  res.status(200).json({
+    success: true,
+    message: "Mudzen API is running 🚀",
+  });
+});
+
 const PORT = process.env.PORT || 5000;
 
 const startServer = async () => {

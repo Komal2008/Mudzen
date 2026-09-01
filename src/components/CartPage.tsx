@@ -7,9 +7,9 @@ import { motion } from 'motion/react';
 
 interface CartPageProps {
   cart: CartItem[];
-  onUpdateQuantity: (productId: number, quantity: number) => void;
-  onRemoveItem: (productId: number) => void;
-  onNavigate: (page: string, productId?: number) => void;
+  onUpdateQuantity: (productId: string | number, quantity: number) => void;
+  onRemoveItem: (productId: string | number) => void;
+  onNavigate: (page: string, productId?: string | number) => void;
 }
 
 export function CartPage({ cart, onUpdateQuantity, onRemoveItem, onNavigate }: CartPageProps) {

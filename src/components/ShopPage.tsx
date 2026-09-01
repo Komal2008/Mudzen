@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Card, CardContent } from './ui/card';
 import { Button } from './ui/button';
 import { Badge } from './ui/badge';
@@ -8,20 +8,60 @@ import { Label } from './ui/label';
 import { ImageWithFallback } from './figma/ImageWithFallback';
 import { ShoppingCart, Star } from 'lucide-react';
 import { Product } from '../types';
-import { products } from '../data/products';
+import { fetchProducts } from '../services/productService';
 import { motion } from 'motion/react';
 import { toast } from 'sonner';
 
 interface ShopPageProps {
-  onNavigate: (page: string, productId?: number) => void;
+  selectedProductId?: string | number | null;
+  onNavigate: (page: string, productId?: string | number) => void;
   onAddToCart: (product: Product) => void;
 }
 
-export function ShopPage({ onNavigate, onAddToCart }: ShopPageProps) {
+export function ShopPage({ selectedProductId, onNavigate, onAddToCart }: ShopPageProps) {
+  const [products, setProducts] = useState<Product[]>([]);
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   const [priceRange, setPriceRange] = useState<string>('all');
   const [sortBy, setSortBy] = useState<string>('featured');
   const [showNewOnly, setShowNewOnly] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  const selectedProduct =
+    selectedProductId !== null && selectedProductId !== undefined
+      ? products.find(product => String(product.id) === String(selectedProductId)) ?? null
+      : null;
+
+  useEffect(() => {
+    let isMounted = true;
+
+    const loadProducts = async () => {
+      setIsLoading(true);
+      setError(null);
+
+      try {
+        const data = await fetchProducts();
+        if (isMounted) {
+          setProducts(data);
+        }
+      } catch (err) {
+        if (isMounted) {
+          setError('Unable to load products right now.');
+        }
+        console.error(err);
+      } finally {
+        if (isMounted) {
+          setIsLoading(false);
+        }
+      }
+    };
+
+    loadProducts();
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
 
   const categories = ['Ceramic Mugs', 'Clay Pots', 'Decorative Vases', 'Handcrafted Plates'];
 
@@ -62,6 +102,36 @@ export function ShopPage({ onNavigate, onAddToCart }: ShopPageProps) {
     onAddToCart(product);
     toast.success(`${product.name} added to cart!`);
   };
+
+  useEffect(() => {
+    if (!selectedProductId || !products.length) return;
+
+    const matchingProduct = products.find(product => String(product.id) === String(selectedProductId));
+    if (matchingProduct) {
+      const card = document.getElementById(`product-${matchingProduct.id}`);
+      if (card) {
+        card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    }
+  }, [selectedProductId, products]);
+
+  if (isLoading) {
+    return (
+      <div className="container mx-auto px-4 py-12 text-center">
+        <h2 className="text-dark-earth mb-4">Loading products...</h2>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="container mx-auto px-4 py-12 text-center">
+        <h2 className="text-dark-earth mb-4">Unable to load products</h2>
+        <p className="text-muted-foreground mb-6">{error}</p>
+        <Button onClick={() => window.location.reload()}>Retry</Button>
+      </div>
+    );
+  }
 
   return (
     <div className="container mx-auto px-4 py-12">
@@ -176,14 +246,18 @@ export function ShopPage({ onNavigate, onAddToCart }: ShopPageProps) {
 
           {/* Products Grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
-            {sortedProducts.map((product, index) => (
+            {sortedProducts.map((product, index) => {
+              const isSelected = selectedProduct && String(product.id) === String(selectedProduct.id);
+
+              return (
               <motion.div
+                id={`product-${product.id}`}
                 key={product.id}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.05 }}
               >
-                <Card className="overflow-hidden h-full flex flex-col group hover:shadow-lg transition-shadow">
+                <Card className={`overflow-hidden h-full flex flex-col group hover:shadow-lg transition-shadow ${isSelected ? 'ring-2 ring-[#CB6843]' : ''}`}>
                   <div
                     className="relative h-64 overflow-hidden cursor-pointer"
                     onClick={() => onNavigate('product', product.id)}
@@ -244,7 +318,8 @@ export function ShopPage({ onNavigate, onAddToCart }: ShopPageProps) {
                   </CardContent>
                 </Card>
               </motion.div>
-            ))}
+              );
+            })}
           </div>
 
           {sortedProducts.length === 0 && (

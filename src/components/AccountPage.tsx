@@ -25,13 +25,14 @@ import {
 } from 'lucide-react';
 import { User } from '../types';
 import { toast } from 'sonner';
+import logoImage from './logo/image.png';
 
 interface AccountPageProps {
   user: User | null;
   onLogin: (email: string, password: string) => void;
   onSignup: (name: string, email: string, password: string) => void;
   onLogout: () => void;
-  onNavigate: (page: string, productId?: number) => void;
+  onNavigate: (page: string, productId?: string | number) => void;
 }
 
 export function AccountPage({ user, onLogin, onSignup, onLogout, onNavigate }: AccountPageProps) {
@@ -117,95 +118,91 @@ export function AccountPage({ user, onLogin, onSignup, onLogout, onNavigate }: A
       },
     ];
 
+    const potteryImage = 'https://images.unsplash.com/photo-1695740633675-d060b607f5c4?auto=format&fit=crop&w=1200&q=80';
+
     return (
-      <div className=" min-h-screen flex items-center justify-centerbg-[#FAF7F2] px-4 py-8 sm:px-6 lg:px-8 lg:py-16">
-        <div className="mx-auto flex max-w-6xl items-center justify-center">
+      <div className="min-h-screen overflow-x-hidden bg-[#F7F1E9] px-4 py-10 sm:px-6 lg:px-8">
+        <div className="mx-auto w-full max-w-[1180px] px-0 sm:px-1">
           <motion.div
-            initial={{ opacity: 0, y: 22 }}
+            initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.45, ease: 'easeOut' }}
-            className="w-full max-w-7xl overflow-hidden rounded-[24px] border border-[#E8DDD2] bg-[#FFFDFB] shadow-[0_28px_80px_-36px_rgba(74,61,53,0.45)]"
+            className="overflow-hidden rounded-[28px] border border-[#E8DDD2] bg-[#FFFDFB] shadow-[0_26px_70px_-42px_rgba(62,46,38,0.72)]"
           >
-            <div className="grid grid-cols-1 lg:grid-cols-[1fr_1fr] min-h-[760px]">
-              <div className="flex flex-col justify-between bg-[#F4EBDC] p-8 sm:p-10 lg:p-12">
-                <div>
-                  <div className="mb-8 inline-flex items-center gap-3">
-                    <div className="flex h-11 w-11 items-center justify-center rounded-full border border-[#E8DDD2] bg-[#FFFDFB] text-[#C96E46] shadow-sm">
-                      <Leaf className="h-5 w-5" />
+            <div className="grid w-full grid-cols-1 gap-6 px-4 py-4 sm:px-5 sm:py-5 lg:grid-cols-[minmax(0,1.05fr)_minmax(380px,460px)] lg:gap-[60px] lg:px-6 lg:py-6 xl:px-8">
+              <div className="relative h-[300px] overflow-hidden rounded-[22px] border border-[#E7D9C9] lg:h-[620px]">
+                <img
+                  src={potteryImage}
+                  alt="Handcrafted pottery display"
+                  className="h-full w-full object-cover"
+                />
+                <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(31,24,20,0.7),rgba(31,24,20,0.38),rgba(31,24,20,0.7))]" />
+
+                <div className="absolute inset-0 flex flex-col justify-between p-6 sm:p-8 lg:p-10">
+                  <div className="flex items-center gap-3">
+                    <div className="flex h-11 w-11 items-center justify-center rounded-full border border-white/20 bg-white/10 backdrop-blur-sm">
+                      <img src={logoImage} alt="Mudzen logo" className="h-6 w-6 object-contain" />
                     </div>
                     <div>
-                      <div className="text-lg font-semibold tracking-[0.18em] text-[#2C211A]" style={{ fontFamily: 'Playfair Display, Georgia, serif' }}>
+                      <div className="text-lg font-semibold tracking-[0.18em] text-[#F8F2ED]" style={{ fontFamily: 'Playfair Display, Georgia, serif' }}>
                         MUDZEN
                       </div>
-                      <div className="text-xs uppercase tracking-[0.22em] text-[#6B5E56]">Handcrafted Pottery</div>
                     </div>
                   </div>
 
-                  <div className="mb-8 flex justify-center sm:justify-start lg:justify-center">
-                    <div className="hidden sm:flex h-[320px] w-[320px] w-[230px] items-center justify-center rounded-[24px] border border-[#E8DDD2] bg-[#FFFDFB]/90 p-5 shadow-[inset_0_1px_0_rgba(255,255,255,0.7)] sm:h-[260px] sm:w-[260px]">
-                      <svg className="h-full w-full" viewBox="0 0 260 260" role="img" aria-label="Handcrafted pottery illustration">
-                        <ellipse cx="130" cy="221" rx="74" ry="12" fill="#E8DDD2" />
-                        <path d="M78 96c7 17 14 31 14 55 0 39 17 61 38 61s38-22 38-61c0-24 7-38 14-55H78Z" fill="#C96E46" />
-                        <path d="M92 111c8 11 17 20 17 43 0 27 8 42 21 42s21-15 21-42c0-23 9-32 17-43H92Z" fill="#D87B4A" opacity="0.58" />
-                        <ellipse cx="130" cy="96" rx="52" ry="18" fill="#B75F39" />
-                        <ellipse cx="130" cy="94" rx="35" ry="10" fill="#F4EBDC" />
-                        <path d="M78 139c35 12 69 12 104 0" fill="none" stroke="#F4EBDC" strokeWidth="7" strokeLinecap="round" opacity="0.72" />
-                        <path d="M91 172c25 9 53 9 78 0" fill="none" stroke="#F4EBDC" strokeWidth="6" strokeLinecap="round" opacity="0.62" />
-                        <path d="M72 75c18-22 40-33 67-34 19-1 36 4 51 15" fill="none" stroke="#A46B47" strokeWidth="6" strokeLinecap="round" opacity="0.45" />
-                        <path d="M79 65c15-11 31-18 49-20" fill="none" stroke="#C96E46" strokeWidth="4" strokeLinecap="round" opacity="0.7" />
-                      </svg>
-                    </div>
+                  <div className="max-w-sm">
+                    <h1 className="text-3xl font-semibold leading-[1.1] text-[#FFF9F5] sm:text-4xl lg:text-[2.7rem]" style={{ fontFamily: 'Playfair Display, Georgia, serif' }}>
+                      Crafted by Hands,
+                      <span className="mt-1 block text-[#F0C49B]">Rooted in Earth</span>
+                    </h1>
+                    <p className="mt-4 text-sm leading-6 text-[#F4EDE8] sm:text-[15px]">
+                      Timeless handcrafted pottery created by skilled local artisans.
+                    </p>
                   </div>
 
-                  <h2 className="mb-4 text-5xl lg:text-6xl font-semibold leading-tight text-[#2C211A] sm:text-[2.35rem] lg:text-[2.7rem]" style={{ fontFamily: 'Playfair Display, Georgia, serif' }}>
-                    Crafted by Hands,
-                    <span className="block text-[#C96E46]">Rooted in Earth</span>
-                  </h2>
-                  <p className="max-w-md text-[15px] leading-7 text-[#6B5E56]">
-                    Experience timeless handcrafted pottery created with care by local artisans.
-                  </p>
-                </div>
-
-                <div className="mt-8 grid gap-3">
-                  {authFeatures.map((feature, index) => {
-                    const Icon = feature.icon;
-                    return (
-                      <motion.div
-                        key={feature.title}
-                        initial={{ opacity: 0, x: -10 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ delay: 0.08 + index * 0.08 }}
-                        className="flex items-start gap-3 rounded-[16px] border border-[#E8DDD2] bg-[#FFFDFB] px-4 py-3 shadow-sm"
-                      >
-                        <div className="mt-0.5 flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-[#FAF7F2] text-[#C96E46]">
-                          <Icon className="h-4.5 w-4.5" />
-                        </div>
-                        <div>
-                          <div className="text-sm font-semibold text-[#2C211A]">{feature.title}</div>
-                          <p className="mt-1 text-sm leading-6 text-[#6B5E56]">{feature.description}</p>
-                        </div>
-                      </motion.div>
-                    );
-                  })}
+                  <div className="max-w-sm space-y-2.5">
+                    {authFeatures.map((feature, index) => {
+                      const Icon = feature.icon;
+                      return (
+                        <motion.div
+                          key={feature.title}
+                          initial={{ opacity: 0, x: -12 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          transition={{ delay: 0.08 + index * 0.08 }}
+                          className="flex items-center gap-3 rounded-[14px] border border-white/12 bg-white/6 px-3 py-2.5 backdrop-blur-[1px]"
+                        >
+                          <div className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-[#F8EFE7] text-[#C96E46]">
+                            <Icon className="h-3.5 w-3.5" />
+                          </div>
+                          <div className="text-sm font-medium text-[#F7F0EA]">{feature.title}</div>
+                        </motion.div>
+                      );
+                    })}
+                  </div>
                 </div>
               </div>
 
-              <div className="bg-[#FFFDFB] p-6 sm:p-8 lg:p-10 xl:p-12">
+              <div className="flex items-center justify-center bg-[#FFFDFB] py-2 sm:py-4 lg:py-8">
                 <motion.div
                   key={isLogin ? 'login' : 'signup'}
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.25 }}
-                  className="mx-auto flex h-full max-w-[500px] flex-col justify-center"
+                  className="w-full max-w-[420px]"
                 >
-                  <div className="mb-8 text-center lg:text-left">
+                  <div className="mb-7 text-center lg:text-left">
                     <div className="mb-4 flex items-center justify-center lg:justify-start">
-                      <div className="inline-flex items-center gap-2 rounded-full border border-[#E8DDD2] bg-[#FAF7F2] px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.22em] text-[#C96E46]">
+                      <div className="inline-flex items-center gap-2 rounded-full border border-[#E8DDD2] bg-[#FAF7F2] px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.2em] text-[#C96E46]">
                         <Sparkles className="h-3.5 w-3.5" />
                         {isLogin ? 'Welcome Back' : 'Create Account'}
                       </div>
                     </div>
-                    <h2 className="text-[2rem] font-semibold tracking-normal text-[#2C211A] sm:text-[2.1rem]" style={{ fontFamily: 'Playfair Display, Georgia, serif' }}>
+                    <div className="mb-5 flex items-center justify-center lg:justify-start">
+                      <div className="flex h-12 w-12 items-center justify-center rounded-full border border-[#E8DDD2] bg-[#FAF7F2] shadow-[0_12px_30px_-20px_rgba(74,61,53,0.6)]">
+                        <img src={logoImage} alt="Mudzen logo" className="h-7 w-7 object-contain" />
+                      </div>
+                    </div>
+                    <h2 className="text-[2rem] font-semibold leading-tight text-[#2C211A] sm:text-[2.2rem]" style={{ fontFamily: 'Playfair Display, Georgia, serif' }}>
                       {isLogin ? 'Sign in to Mudzen' : 'Create your account'}
                     </h2>
                     <p className="mt-2 text-sm leading-6 text-[#6B5E56] sm:text-[15px]">
@@ -227,7 +224,7 @@ export function AccountPage({ user, onLogin, onSignup, onLogout, onNavigate }: A
                             required
                             value={loginEmail}
                             onChange={(e) => setLoginEmail(e.target.value)}
-                            className="h-14 rounded-[14px] border-[#E6D9CA] bg-[#FFFDFB] pl-12 pr-4 text-[15px] text-[#2C211A] shadow-[0_10px_30px_-20px_rgba(44,33,26,0.35)] transition-all duration-200 placeholder:text-[#6B5E56]/60 focus:border-[#D87B4A] focus:ring-2 focus:ring-[#C96E46]/30"
+                            className="h-14 w-full rounded-[14px] border-[#E6D9CA] bg-[#FFFDFB] pl-12 pr-4 text-[15px] text-[#2C211A] shadow-[0_10px_30px_-20px_rgba(44,33,26,0.35)] transition-all duration-200 placeholder:text-[#6B5E56]/60 focus:border-[#D87B4A] focus:ring-2 focus:ring-[#C96E46]/30"
                             placeholder="you@example.com"
                           />
                         </div>
@@ -242,7 +239,7 @@ export function AccountPage({ user, onLogin, onSignup, onLogout, onNavigate }: A
                             required
                             value={loginPassword}
                             onChange={(e) => setLoginPassword(e.target.value)}
-                            className="h-14 rounded-[14px] border-[#E6D9CA] bg-[#FFFDFB] pl-12 pr-12 text-[15px] text-[#2C211A] shadow-[0_10px_30px_-20px_rgba(44,33,26,0.35)] transition-all duration-200 placeholder:text-[#6B5E56]/60 focus:border-[#D87B4A] focus:ring-2 focus:ring-[#C96E46]/30"
+                            className="h-14 w-full rounded-[14px] border-[#E6D9CA] bg-[#FFFDFB] pl-12 pr-12 text-[15px] text-[#2C211A] shadow-[0_10px_30px_-20px_rgba(44,33,26,0.35)] transition-all duration-200 placeholder:text-[#6B5E56]/60 focus:border-[#D87B4A] focus:ring-2 focus:ring-[#C96E46]/30"
                             placeholder="Enter your password"
                           />
                           <button
@@ -293,7 +290,7 @@ export function AccountPage({ user, onLogin, onSignup, onLogout, onNavigate }: A
                             required
                             value={signupName}
                             onChange={(e) => setSignupName(e.target.value)}
-                            className="h-14 rounded-[14px] border-[#E6D9CA] bg-[#FFFDFB] pl-12 pr-4 text-[15px] text-[#2C211A] shadow-[0_10px_30px_-20px_rgba(44,33,26,0.35)] transition-all duration-200 placeholder:text-[#6B5E56]/60 focus:border-[#D87B4A] focus:ring-2 focus:ring-[#C96E46]/30"
+                            className="h-14 w-full rounded-[14px] border-[#E6D9CA] bg-[#FFFDFB] pl-12 pr-4 text-[15px] text-[#2C211A] shadow-[0_10px_30px_-20px_rgba(44,33,26,0.35)] transition-all duration-200 placeholder:text-[#6B5E56]/60 focus:border-[#D87B4A] focus:ring-2 focus:ring-[#C96E46]/30"
                             placeholder="Ava Chen"
                           />
                         </div>
@@ -308,7 +305,7 @@ export function AccountPage({ user, onLogin, onSignup, onLogout, onNavigate }: A
                             required
                             value={signupEmail}
                             onChange={(e) => setSignupEmail(e.target.value)}
-                            className="h-[54px] rounded-[14px] border-[#E8DDD2] bg-[#FFFDFB] pl-12 pr-4 text-[15px] text-[#2C211A] shadow-[0_10px_30px_-20px_rgba(44,33,26,0.35)] transition-all duration-200 placeholder:text-[#6B5E56]/60 focus:border-[#D87B4A] focus:ring-2 focus:ring-[#D87B4A]/20"
+                            className="h-[54px] w-full rounded-[14px] border-[#E8DDD2] bg-[#FFFDFB] pl-12 pr-4 text-[15px] text-[#2C211A] shadow-[0_10px_30px_-20px_rgba(44,33,26,0.35)] transition-all duration-200 placeholder:text-[#6B5E56]/60 focus:border-[#D87B4A] focus:ring-2 focus:ring-[#D87B4A]/20"
                             placeholder="you@example.com"
                           />
                         </div>
@@ -323,7 +320,7 @@ export function AccountPage({ user, onLogin, onSignup, onLogout, onNavigate }: A
                             required
                             value={signupPassword}
                             onChange={(e) => setSignupPassword(e.target.value)}
-                            className="h-[54px] rounded-[14px] border-[#E8DDD2] bg-[#FFFDFB] pl-12 pr-12 text-[15px] text-[#2C211A] shadow-[0_10px_30px_-20px_rgba(44,33,26,0.35)] transition-all duration-200 placeholder:text-[#6B5E56]/60 focus:border-[#D87B4A] focus:ring-2 focus:ring-[#D87B4A]/20"
+                            className="h-[54px] w-full rounded-[14px] border-[#E8DDD2] bg-[#FFFDFB] pl-12 pr-12 text-[15px] text-[#2C211A] shadow-[0_10px_30px_-20px_rgba(44,33,26,0.35)] transition-all duration-200 placeholder:text-[#6B5E56]/60 focus:border-[#D87B4A] focus:ring-2 focus:ring-[#D87B4A]/20"
                             placeholder="Create a strong password"
                           />
                           <button
@@ -336,7 +333,7 @@ export function AccountPage({ user, onLogin, onSignup, onLogout, onNavigate }: A
                           </button>
                         </div>
                         <div className="rounded-[14px] border border-[#E8DDD2] bg-[#FAF7F2] p-3">
-                          <div className="mb-2 flex items-center  flex flex-col justify-center text-[11px] font-semibold uppercase tracking-[0.28em] text-[#C96E46]">
+                          <div className="mb-2 flex flex-col items-center justify-center text-[11px] font-semibold uppercase tracking-[0.28em] text-[#C96E46]">
                             <span>Password strength</span>
                             <span className="text-xs font-semibold text-[#6B5E56]">{passwordStrength.label}</span>
                           </div>
@@ -366,7 +363,7 @@ export function AccountPage({ user, onLogin, onSignup, onLogout, onNavigate }: A
                             required
                             value={signupConfirmPassword}
                             onChange={(e) => setSignupConfirmPassword(e.target.value)}
-                            className="h-[54px] rounded-[14px] border-[#E8DDD2] bg-[#FFFDFB] pl-12 pr-12 text-[15px] text-[#2C211A] shadow-[0_10px_30px_-20px_rgba(44,33,26,0.35)] transition-all duration-200 placeholder:text-[#6B5E56]/60 focus:border-[#D87B4A] focus:ring-2 focus:ring-[#D87B4A]/20"
+                            className="h-[54px] w-full rounded-[14px] border-[#E8DDD2] bg-[#FFFDFB] pl-12 pr-12 text-[15px] text-[#2C211A] shadow-[0_10px_30px_-20px_rgba(44,33,26,0.35)] transition-all duration-200 placeholder:text-[#6B5E56]/60 focus:border-[#D87B4A] focus:ring-2 focus:ring-[#D87B4A]/20"
                             placeholder="Repeat your password"
                           />
                           <button
