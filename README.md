@@ -244,10 +244,18 @@ Contributions are welcome!
 
 # 👩‍💻 Author
 
-### Komal Pandey
+<div align="center">
 
-💼 Computer Science Student
+Komal Pandey
 
-🌱 Learning Full Stack Development & AI
+🎓 Computer Science Student
+💻 Full Stack Developer in Progress
+🤖 Exploring AI & Agentic AI
 
-⭐ If you like this project, don't forget to star the repository!
+<br/>
+
+⭐ If you like Mudzen, consider giving the repository a star!
+
+Made with ❤️ and lots of code.
+
+</div>
