@@ -142,8 +142,23 @@
     -webkit-tap-highlight-color: transparent;
   }
 
+  html {
+    overflow-x: hidden;
+  }
+
   body {
     line-height: inherit;
+    min-width: 0;
+    overflow-x: hidden;
+  }
+
+  img, svg {
+    display: block;
+    max-width: 100%;
+  }
+
+  #root {
+    min-height: 100vh;
   }
 
   hr {
@@ -2945,5 +2960,152 @@
   to {
     opacity: var(--tw-exit-opacity, 1);
     transform: translate3d(var(--tw-exit-translate-x, 0), var(--tw-exit-translate-y, 0), 0) scale3d(var(--tw-exit-scale, 1), var(--tw-exit-scale, 1), var(--tw-exit-scale, 1)) rotate(var(--tw-exit-rotate, 0));
+  }
+}
+/* ================================
+   MUDZEN AUTH PAGE - FINAL LAYOUT
+   ================================ */
+
+.mudzen-auth-page {
+  min-height: calc(100vh - 72px);
+  width: 100%;
+  background: #f7f1e9;
+  padding: 48px 24px;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.mudzen-auth-card {
+  width: 100%;
+  max-width: 1120px;
+  min-height: 620px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  background: #fffdfb;
+  border: 1px solid #e8ddd2;
+  border-radius: 28px;
+  overflow: hidden;
+  box-shadow: 0 24px 70px rgba(65, 45, 32, 0.14);
+}
+
+.mudzen-auth-visual {
+  position: relative;
+  min-height: 620px;
+  overflow: hidden;
+  background: #4a3428;
+}
+
+.mudzen-auth-visual img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.mudzen-auth-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(38, 27, 20, 0.08) 20%,
+    rgba(38, 27, 20, 0.72) 100%
+  );
+}
+
+.mudzen-auth-visual-content {
+  position: absolute;
+  inset: auto 40px 40px 40px;
+  z-index: 2;
+  color: white;
+}
+
+.mudzen-auth-features {
+  display: grid;
+  gap: 10px;
+  margin-top: 28px;
+}
+
+.mudzen-auth-feature {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 11px 14px;
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 12px;
+  background: rgba(255,255,255,0.10);
+  backdrop-filter: blur(8px);
+}
+
+.mudzen-auth-form-panel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 56px 52px;
+  background: #fffdfb;
+}
+
+.mudzen-auth-form {
+  width: 100%;
+  max-width: 410px;
+  margin: 0 auto;
+}
+
+.mudzen-auth-input {
+  width: 100% !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+.mudzen-auth-form form {
+  width: 100%;
+}
+
+.mudzen-auth-form button[type="submit"] {
+  width: 100%;
+}
+
+@media (max-width: 900px) {
+  .mudzen-auth-page {
+    padding: 28px 18px;
+  }
+
+  .mudzen-auth-card {
+    grid-template-columns: 1fr;
+    max-width: 620px;
+  }
+
+  .mudzen-auth-visual {
+    min-height: 360px;
+  }
+
+  .mudzen-auth-form-panel {
+    padding: 42px 28px;
+  }
+}
+
+@media (max-width: 520px) {
+  .mudzen-auth-page {
+    padding: 18px 12px;
+  }
+
+  .mudzen-auth-card {
+    border-radius: 20px;
+  }
+
+  .mudzen-auth-visual {
+    min-height: 300px;
+  }
+
+  .mudzen-auth-visual-content {
+    inset: auto 22px 22px;
+  }
+
+  .mudzen-auth-form-panel {
+    padding: 36px 20px;
+  }
+
+  .mudzen-auth-form {
+    max-width: 100%;
   }
 }

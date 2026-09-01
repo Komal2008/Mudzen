@@ -7,7 +7,7 @@ import { motion } from 'motion/react';
 import { toast } from 'sonner';
 
 interface HomePageProps {
-  onNavigate: (page: string, productId?: number) => void;
+  onNavigate: (page: string, productId?: string | number) => void;
 }
 
 export function HomePage({ onNavigate }: HomePageProps) {

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Button } from './ui/button';
 import { Badge } from './ui/badge';
 import { Card, CardContent } from './ui/card';
@@ -6,23 +6,72 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from './ui/tabs';
 import { ImageWithFallback } from './figma/ImageWithFallback';
 import { Star, Minus, Plus, ShoppingCart, Heart, Truck, RotateCcw, ShieldCheck } from 'lucide-react';
 import { Product } from '../types';
-import { products } from '../data/products';
+import { fetchProductById, fetchProducts } from '../services/productService';
 import { motion } from 'motion/react';
 import { toast } from 'sonner';
 
 interface ProductDetailPageProps {
-  productId: number;
-  onNavigate: (page: string, productId?: number) => void;
+  productId: string | number;
+  onNavigate: (page: string, productId?: string | number) => void;
   onAddToCart: (product: Product, quantity: number) => void;
 }
 
 export function ProductDetailPage({ productId, onNavigate, onAddToCart }: ProductDetailPageProps) {
   const [quantity, setQuantity] = useState(1);
   const [isFavorite, setIsFavorite] = useState(false);
+  const [product, setProduct] = useState<Product | null>(null);
+  const [relatedProducts, setRelatedProducts] = useState<Product[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
-  const product = products.find(p => p.id === productId);
+  useEffect(() => {
+    let isMounted = true;
 
-  if (!product) {
+    const loadProduct = async () => {
+      setIsLoading(true);
+      setError(null);
+
+      try {
+        const [selectedProduct, allProducts] = await Promise.all([
+          fetchProductById(productId),
+          fetchProducts(),
+        ]);
+
+        if (!isMounted) return;
+
+        setProduct(selectedProduct);
+        setRelatedProducts(
+          allProducts.filter(
+            (item) => String(item.id) !== String(productId) && item.category === selectedProduct?.category
+          ).slice(0, 3)
+        );
+      } catch (err) {
+        if (!isMounted) return;
+        setError('Unable to load this product right now.');
+        console.error(err);
+      } finally {
+        if (isMounted) {
+          setIsLoading(false);
+        }
+      }
+    };
+
+    loadProduct();
+
+    return () => {
+      isMounted = false;
+    };
+  }, [productId]);
+
+  if (isLoading) {
+    return (
+      <div className="container mx-auto px-4 py-12 text-center">
+        <h2 className="text-dark-earth mb-4">Loading product...</h2>
+      </div>
+    );
+  }
+
+  if (error || !product) {
     return (
       <div className="container mx-auto px-4 py-12 text-center">
         <h2 className="text-dark-earth mb-4">Product not found</h2>
@@ -40,10 +89,6 @@ export function ProductDetailPage({ productId, onNavigate, onAddToCart }: Produc
     onAddToCart(product, quantity);
     onNavigate('cart');
   };
-
-  const relatedProducts = products
-    .filter(p => p.category === product.category && p.id !== product.id)
-    .slice(0, 3);
 
   return (
     <div className="container mx-auto px-4 py-12">

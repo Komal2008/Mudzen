@@ -20,7 +20,7 @@ type Page = 'home' | 'shop' | 'product' | 'cart' | 'checkout' | 'order-confirmat
 
 function AppContent() {
   const [currentPage, setCurrentPage] = useState<Page>('home');
-  const [selectedProductId, setSelectedProductId] = useState<number | null>(null);
+  const [selectedProductId, setSelectedProductId] = useState<string | number | null>(null);
   const [cart, setCart] = useState<CartItem[]>([]);
   const [user, setUser] = useState<User | null>(null);
   const [orderNumber, setOrderNumber] = useState<string>('');
@@ -30,7 +30,7 @@ function AppContent() {
     window.scrollTo(0, 0);
   }, [currentPage]);
 
-  const handleNavigate = (page: string, productId?: number) => {
+  const handleNavigate = (page: string, productId?: string | number) => {
     setCurrentPage(page as Page);
     if (productId !== undefined) {
       setSelectedProductId(productId);
@@ -51,7 +51,7 @@ function AppContent() {
     });
   };
 
-  const handleUpdateQuantity = (productId: number, quantity: number) => {
+  const handleUpdateQuantity = (productId: string | number, quantity: number) => {
     setCart(prevCart =>
       prevCart.map(item =>
         item.product.id === productId ? { ...item, quantity } : item
@@ -59,7 +59,7 @@ function AppContent() {
     );
   };
 
-  const handleRemoveItem = (productId: number) => {
+  const handleRemoveItem = (productId: string | number) => {
     setCart(prevCart => prevCart.filter(item => item.product.id !== productId));
     toast.success('Item removed from cart');
   };
@@ -165,17 +165,21 @@ function AppContent() {
   const cartItemCount = cart.reduce((sum, item) => sum + item.quantity, 0);
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col overflow-x-hidden">
       <Header
         onNavigate={handleNavigate}
         cartItemCount={cartItemCount}
         currentPage={currentPage}
       />
 
-      <main className="flex-1">
+      <main className="flex-1 overflow-x-hidden">
         {currentPage === 'home' && <HomePage onNavigate={handleNavigate} />}
         {currentPage === 'shop' && (
-          <ShopPage onNavigate={handleNavigate} onAddToCart={handleAddToCart} />
+          <ShopPage
+            selectedProductId={selectedProductId}
+            onNavigate={handleNavigate}
+            onAddToCart={handleAddToCart}
+          />
         )}
         {currentPage === 'product' && selectedProductId && (
           <ProductDetailPage
