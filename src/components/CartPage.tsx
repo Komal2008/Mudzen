@@ -14,7 +14,7 @@ interface CartPageProps {
 
 export function CartPage({ cart, onUpdateQuantity, onRemoveItem, onNavigate }: CartPageProps) {
   const subtotal = cart.reduce((sum, item) => sum + item.product.price * item.quantity, 0);
-  const shipping = subtotal > 50 ? 0 : 10;
+  const shipping = subtotal > 999 ? 0 : 79;
   const total = subtotal + shipping;
 
   if (cart.length === 0) {
@@ -126,9 +126,9 @@ export function CartPage({ cart, onUpdateQuantity, onRemoveItem, onNavigate }: C
 
                         {/* Price */}
                         <div className="text-right">
-                          <p className="clay-brown">${item.product.price * item.quantity}</p>
+                          <p className="clay-brown">₹{(item.product.price * item.quantity).toLocaleString('en-IN')}</p>
                           <p className="text-sm text-muted-foreground">
-                            ${item.product.price} each
+                            ₹{item.product.price.toLocaleString('en-IN')} each
                           </p>
                         </div>
                       </div>
@@ -153,20 +153,20 @@ export function CartPage({ cart, onUpdateQuantity, onRemoveItem, onNavigate }: C
               <div className="space-y-3 mb-6">
                 <div className="flex justify-between">
                   <span className="text-muted-foreground">Subtotal</span>
-                  <span>${subtotal.toFixed(2)}</span>
+                  <span>₹{subtotal.toLocaleString('en-IN')}</span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-muted-foreground">Shipping</span>
-                  <span>{shipping === 0 ? 'Free' : `$${shipping.toFixed(2)}`}</span>
+                  <span>{shipping === 0 ? 'Free' : `₹${shipping.toLocaleString('en-IN')}`}</span>
                 </div>
-                {subtotal > 0 && subtotal < 50 && (
+                {subtotal > 0 && subtotal < 999 && (
                   <p className="text-sm text-muted-foreground">
-                    Add ${(50 - subtotal).toFixed(2)} more for free shipping!
+                    Add ₹{(999 - subtotal).toLocaleString('en-IN')} more for free shipping!
                   </p>
                 )}
                 <div className="border-t pt-3 flex justify-between">
                   <span>Total</span>
-                  <span className="clay-brown">${total.toFixed(2)}</span>
+                  <span className="clay-brown">₹{total.toLocaleString('en-IN')}</span>
                 </div>
               </div>
 

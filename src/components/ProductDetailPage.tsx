@@ -159,14 +159,14 @@ export function ProductDetailPage({ productId, onNavigate, onAddToCart }: Produc
 
           {/* Price */}
           <div className="flex items-center gap-3 mb-6">
-            <span className="clay-brown">${product.price}</span>
+            <span className="clay-brown">₹{product.price.toLocaleString('en-IN')}</span>
             {product.originalPrice && (
               <>
                 <span className="text-xl text-muted-foreground line-through">
-                  ${product.originalPrice}
+                  ₹{product.originalPrice.toLocaleString('en-IN')}
                 </span>
                 <Badge variant="outline" className="border-terracotta text-terracotta">
-                  Save ${product.originalPrice - product.price}
+                  Save ₹{(product.originalPrice - product.price).toLocaleString('en-IN')}
                 </Badge>
               </>
             )}
@@ -234,7 +234,7 @@ export function ProductDetailPage({ productId, onNavigate, onAddToCart }: Produc
               <div className="flex items-start gap-3">
                 <Truck className="h-5 w-5 clay-brown shrink-0 mt-0.5" />
                 <div>
-                  <p>Free Shipping on orders over $50</p>
+                  <p>Free Shipping on orders over ₹999</p>
                   <p className="text-sm text-muted-foreground">
                     Standard delivery in 5-7 business days
                   </p>
@@ -297,13 +297,13 @@ export function ProductDetailPage({ productId, onNavigate, onAddToCart }: Produc
                 <h3 className="text-dark-earth mb-4">Shipping Information</h3>
                 <div className="space-y-4">
                   <div>
-                    <h4 className="mb-2">Standard Shipping (Free over $50)</h4>
+                    <h4 className="mb-2">Standard Shipping (Free over ₹999)</h4>
                     <p className="text-muted-foreground">
                       Delivery in 5-7 business days. Orders are processed within 1-2 business days.
                     </p>
                   </div>
                   <div>
-                    <h4 className="mb-2">Express Shipping ($15)</h4>
+                    <h4 className="mb-2">Express Shipping (₹199)</h4>
                     <p className="text-muted-foreground">
                       Delivery in 2-3 business days. Available for select regions.
                     </p>
@@ -379,7 +379,7 @@ export function ProductDetailPage({ productId, onNavigate, onAddToCart }: Produc
                 </div>
                 <CardContent className="p-6">
                   <h4 className="text-dark-earth mb-2">{relatedProduct.name}</h4>
-                  <p className="clay-brown">${relatedProduct.price}</p>
+                  <p className="clay-brown">₹{relatedProduct.price.toLocaleString('en-IN')}</p>
                 </CardContent>
               </Card>
             ))}
