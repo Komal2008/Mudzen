@@ -80,10 +80,10 @@ export function ShopPage({ selectedProductId, onNavigate, onAddToCart }: ShopPag
     }
 
     // Price filter
-    if (priceRange === 'under-30' && product.price >= 30) return false;
-    if (priceRange === '30-50' && (product.price < 30 || product.price > 50)) return false;
-    if (priceRange === '50-75' && (product.price < 50 || product.price > 75)) return false;
-    if (priceRange === 'over-75' && product.price <= 75) return false;
+    if (priceRange === 'under-999' && product.price >= 999) return false;
+    if (priceRange === '999-1999' && (product.price < 999 || product.price > 1999)) return false;
+    if (priceRange === '2000-2999' && (product.price < 2000 || product.price > 2999)) return false;
+    if (priceRange === 'over-2999' && product.price <= 2999) return false;
 
     // New arrivals filter
     if (showNewOnly && !product.isNew) return false;
@@ -186,10 +186,10 @@ export function ShopPage({ selectedProductId, onNavigate, onAddToCart }: ShopPag
                   </SelectTrigger>
                   <SelectContent>
                     <SelectItem value="all">All Prices</SelectItem>
-                    <SelectItem value="under-30">Under $30</SelectItem>
-                    <SelectItem value="30-50">$30 - $50</SelectItem>
-                    <SelectItem value="50-75">$50 - $75</SelectItem>
-                    <SelectItem value="over-75">Over $75</SelectItem>
+                    <SelectItem value="under-999">Under ₹999</SelectItem>
+                    <SelectItem value="999-1999">₹999 - ₹1,999</SelectItem>
+                    <SelectItem value="2000-2999">₹2,000 - ₹2,999</SelectItem>
+                    <SelectItem value="over-2999">Over ₹2,999</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
@@ -245,7 +245,7 @@ export function ShopPage({ selectedProductId, onNavigate, onAddToCart }: ShopPag
           </div>
 
           {/* Products Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6">
             {sortedProducts.map((product, index) => {
               const isSelected = selectedProduct && String(product.id) === String(selectedProduct.id);
 
@@ -299,10 +299,10 @@ export function ShopPage({ selectedProductId, onNavigate, onAddToCart }: ShopPag
                         </span>
                       </div>
                       <div className="flex items-center gap-2 mb-4">
-                        <span className="clay-brown">${product.price}</span>
+                        <span className="clay-brown">₹{product.price.toLocaleString('en-IN')}</span>
                         {product.originalPrice && (
                           <span className="text-sm text-muted-foreground line-through">
-                            ${product.originalPrice}
+                            ₹{product.originalPrice.toLocaleString('en-IN')}
                           </span>
                         )}
                       </div>
