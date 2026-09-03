@@ -74,7 +74,7 @@ function AppContent() {
         {
           id: 'ORD-2024-1001',
           date: 'October 15, 2024',
-          total: 156.00,
+          total: 1798,
           status: 'Delivered',
           items: [
             {
@@ -82,7 +82,7 @@ function AppContent() {
                 id: 1,
                 name: 'Artisan Coffee Mug',
                 category: 'Ceramic Mugs',
-                price: 28,
+                price: 899,
                 image: 'https://images.unsplash.com/photo-1563696629964-8c3ce077cf3e',
                 description: 'Handcrafted ceramic mug',
                 features: [],
@@ -97,7 +97,7 @@ function AppContent() {
         {
           id: 'ORD-2024-1015',
           date: 'October 20, 2024',
-          total: 95.00,
+          total: 2499,
           status: 'Shipped',
           items: [
             {
@@ -105,7 +105,7 @@ function AppContent() {
                 id: 6,
                 name: 'Elegant Tea Set',
                 category: 'Ceramic Mugs',
-                price: 95,
+                price: 2499,
                 image: 'https://images.unsplash.com/photo-1563696629964-8c3ce077cf3e',
                 description: 'Complete tea set',
                 features: [],

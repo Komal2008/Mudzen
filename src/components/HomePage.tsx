@@ -1,10 +1,11 @@
 import { Button } from './ui/button';
 import { Card, CardContent } from './ui/card';
 import { Input } from './ui/input';
-import { Star, Truck, ShieldCheck, Leaf, ArrowRight } from 'lucide-react';
+import { Star, Truck, ShieldCheck, Leaf, ArrowRight, Sprout, Hand, Flame, House } from 'lucide-react';
 import { ImageWithFallback } from './figma/ImageWithFallback';
 import { motion } from 'motion/react';
 import { toast } from 'sonner';
+import logoImage from './logo/image.png';
 
 interface HomePageProps {
   onNavigate: (page: string, productId?: string | number) => void;
@@ -41,24 +42,24 @@ export function HomePage({ onNavigate }: HomePageProps) {
   const testimonials = [
     {
       id: 1,
-      name: 'Sarah Johnson',
+      name: 'Priya Mehta',
       rating: 5,
-      text: 'Absolutely love my ceramic mugs! The craftsmanship is incredible and each piece feels unique. Worth every penny.',
-      avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Sarah'
+      text: 'My ceramic mugs are beautiful and feel wonderfully personal. Perfect beside my morning chai.',
+      avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Priya'
     },
     {
       id: 2,
-      name: 'Michael Chen',
+      name: 'Aarav Sharma',
       rating: 5,
-      text: 'The vases are stunning! They add such a warm, earthy feel to my home. The quality is outstanding.',
-      avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Michael'
+      text: 'The vase brings such a warm, earthy feeling to our home. The packaging was thoughtful too.',
+      avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Aarav'
     },
     {
       id: 3,
-      name: 'Emma Williams',
+      name: 'Ananya Desai',
       rating: 5,
-      text: 'I appreciate the eco-friendly approach and the attention to detail. These are truly handcrafted treasures.',
-      avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Emma'
+      text: "The little variations make every plate feel special. You can truly see the artisan's care.",
+      avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Ananya'
     },
   ];
 
@@ -71,13 +72,20 @@ export function HomePage({ onNavigate }: HomePageProps) {
     {
       icon: Truck,
       title: 'Free Shipping',
-      description: 'On orders over $50'
+      description: 'On orders over ₹999'
     },
     {
       icon: ShieldCheck,
       title: 'Quality Guaranteed',
       description: 'Each piece is carefully inspected'
     },
+  ];
+
+  const storyStages = [
+    { number: '01', title: 'Earth', description: 'Where every piece begins.', detail: 'From the earth comes the clay.', icon: Sprout },
+    { number: '02', title: 'Hands', description: 'Shaped slowly with care.', detail: 'Every movement carries generations.', icon: Hand },
+    { number: '03', title: 'Fire', description: 'Strengthened through patience.', detail: 'Heat transforms humble clay into something lasting.', icon: Flame },
+    { number: '04', title: 'Home', description: 'Made for your everyday story.', detail: 'For chai, meals, and celebrations.', icon: House },
   ];
 
   const handleNewsletterSubmit = (e: React.FormEvent) => {
@@ -147,7 +155,7 @@ export function HomePage({ onNavigate }: HomePageProps) {
       </section>
 
       {/* Categories */}
-      <section className="py-20">
+      <section id="collections" className="py-20">
         <div className="container mx-auto px-4">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -170,7 +178,7 @@ export function HomePage({ onNavigate }: HomePageProps) {
                 transition={{ delay: index * 0.1 }}
                 viewport={{ once: true }}
               >
-                <Card className="overflow-hidden group cursor-pointer hover:shadow-lg transition-shadow" onClick={() => onNavigate('shop')}>
+                <Card className="overflow-hidden group cursor-pointer hover:-translate-y-1 hover:shadow-lg transition-all" onClick={() => onNavigate('shop', category.id)}>
                   <div className="relative h-64 overflow-hidden">
                     <ImageWithFallback
                       src={category.image}
@@ -190,42 +198,96 @@ export function HomePage({ onNavigate }: HomePageProps) {
       </section>
 
       {/* Artisan Story */}
-      <section className="py-20 bg-cream">
+      <section className="bg-cream py-20 sm:py-24">
         <div className="container mx-auto px-4">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
+          <div className="story-layout mx-auto max-w-[1200px] items-start gap-10 md:gap-12 lg:gap-16">
             <motion.div
               initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
+              transition={{ duration: 0.7, ease: 'easeOut' }}
+              className="story-image"
             >
               <ImageWithFallback
                 src="https://images.unsplash.com/photo-1676125105159-517d135a6cc3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjbGF5JTIwcG90dGVyeSUyMHdvcmtzaG9wfGVufDF8fHx8MTc2MTIzODQ1OXww&ixlib=rb-4.1.0&q=80&w=1080"
                 alt="Artisan at work"
-                className="w-full rounded-lg shadow-lg"
+                className="h-full w-full object-cover shadow-[0_16px_38px_-22px_rgba(62,46,38,0.6)]"
               />
             </motion.div>
             <motion.div
               initial={{ opacity: 0, x: 30 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
+              transition={{ duration: 0.7, ease: 'easeOut' }}
+              className="story-content py-1"
             >
-              <h2 className="text-dark-earth mb-6">The Art of Pottery</h2>
-              <p className="mb-4 text-dark-earth/80">
-                At MUDZEN, we believe in preserving ancient pottery traditions while embracing contemporary design. Each piece is lovingly crafted by skilled artisans who have dedicated their lives to mastering this timeless art.
-              </p>
-              <p className="mb-4 text-dark-earth/80">
-                Our pottery is more than just functional ware—it's a celebration of human creativity, natural materials, and sustainable practices. From the clay we source to the glazes we apply, every step honors the earth and the hands that shape it.
-              </p>
-              <p className="mb-6 text-dark-earth/80">
-                When you choose MUDZEN, you're not just buying pottery; you're supporting artisan communities and bringing a piece of authentic craftsmanship into your home.
-              </p>
-              <Button
-                variant="outline"
-                onClick={() => onNavigate('about')}
-                className="border-clay-brown text-clay-brown hover:bg-clay-brown hover:text-cream"
-              >
-                Our Story
-              </Button>
+              <div className="story-header mb-6 text-center">
+                <img src={logoImage} alt="MUDZEN logo" className="story-logo mx-auto mb-3 object-contain" />
+                
+                <h2 className="story-heading text-dark-earth mb-4">The Story Behind Every Piece</h2>
+      
+                <p className="mb-6 max-w-xl text-lg italic leading-7 text-dark-earth/70">
+                Before it reaches your home, every piece begins with earth, hands, patience, and a story.
+                </p>
+              </div>
+              <div>
+                <p className="mb-4 max-w-xl leading-7 text-dark-earth/80">
+                  Long before a cup sits beside your morning chai, before a vase finds its place beside your window, before a plate becomes part of a family meal, there is a quiet moment in an artisan's hands.
+                </p>
+                <p className="max-w-xl leading-7 text-dark-earth/80">
+                  The journey begins with clay. Collected from the earth and shaped slowly by hand, it carries generations of knowledge. An artisan's hands press, turn, smooth and shape it, never rushing the process.
+                </p>
+              </div>
+              <div className="my-8 sm:my-9">
+                <div className="grid gap-3 sm:grid-cols-2">
+                  {storyStages.map((stage, index) => {
+                    const Icon = stage.icon;
+                    return (
+                      <motion.div
+                        key={stage.number}
+                        initial={{ opacity: 0, y: 14 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: index * 0.1, duration: 0.45 }}
+                        className="relative flex min-h-[112px] items-start gap-3 rounded-[14px] border border-clay-brown/15 bg-white/50 p-4 transition-colors hover:border-terracotta/40"
+                      >
+                        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-terracotta/40 bg-cream text-terracotta">
+                          <Icon className="h-4 w-4" />
+                        </div>
+                        <div className="min-w-0">
+                          <div className="mb-1 flex items-center gap-2">
+                            <span className="text-xs font-semibold tracking-[0.16em] text-terracotta">{stage.number}</span>
+                            <h3 className="text-base font-semibold capitalize text-dark-earth">{stage.title}</h3>
+                          </div>
+                          <p className="text-sm leading-5 text-dark-earth/70">{stage.description}</p>
+                          <p className="mt-1 text-xs leading-4 text-dark-earth/50">{stage.detail}</p>
+                        </div>
+                      </motion.div>
+                    );
+                  })}
+                </div>
+              </div>
+              <div>
+                
+                <p className="mb-3 border-l-2 border-terracotta bg-[#F7EDE3] px-4 py-3 font-serif text-base italic leading-6 text-dark-earth/85">
+                  <b>Every piece carries a little bit of the hands, the earth, and the time that shaped it.</b>
+                </p>
+                <p className="mb-5 max-w-xl leading-7 text-dark-earth/80">
+                  When you choose MUDZEN, you're not simply bringing something beautiful home. You're bringing home a story.
+                </p>
+
+
+                <div>
+                <Button
+                  variant="outline"
+                  onClick={() => onNavigate('about')}
+                  className="border-clay-brown text-clay-brown hover:bg-clay-brown hover:text-cream"
+                >
+                  Meet the Makers
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </Button>
+                </div>
+              </div>
             </motion.div>
           </div>
         </div>
